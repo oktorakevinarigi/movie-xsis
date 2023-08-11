@@ -47,7 +47,7 @@ export function NowPlaying() {
           </div>
         ) : (
           getMovieNowPlaying.data?.results
-            .slice(0, 8)
+            .slice(0, 10)
             .map(item => getCard(item, getMovieGenres.data?.genres || []))
         )}
       </div>
