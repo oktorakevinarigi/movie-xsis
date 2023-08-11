@@ -44,6 +44,7 @@ export function ContentMovies() {
                 ratings={item.vote_average}
                 title={item.title}
                 year={item.release_date ? dayjs(item.release_date).format("YYYY") : ""}
+                overview={item.overview}
               />
             </div>
           ))}

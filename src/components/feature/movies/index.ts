@@ -6,6 +6,7 @@ export { Recommendation } from "./recommendation";
 export { BannerDetail } from "./banner-detail";
 export { Review } from "./review";
 export { TopRate } from "./top-rate";
+export { SearchMovies } from "./search-movies";
 export {
   MovieGenresKeys,
   getMovieGenres,
@@ -16,6 +17,7 @@ export {
   getMovieTopRate,
   MovieTopRateKeys,
   useGetMovieSearch,
+  getMovieSearch,
   getMovieDetail,
   MovieKeys,
   getMovieRecommedations,

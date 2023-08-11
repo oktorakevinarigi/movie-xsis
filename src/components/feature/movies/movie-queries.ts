@@ -77,8 +77,10 @@ export const MovieKeys = {
   list: (query: MovieQuery) => [...MovieKeys.lists(), cleanQuery(query)],
   details: () => [...MovieKeys.all, "DETAIL"],
   detail: (query: MovieDetailQuery) => [...MovieKeys.details(), cleanQuery(query)],
-  searchs: () => [...MovieKeys.all, "DETAIL"],
+  searchs: () => [...MovieKeys.all, "SEARCH"],
   search: (query: MovieSearchQuery) => [...MovieKeys.searchs(), cleanQuery(query)],
+  infiniteLists: () => [...MovieKeys.all, "INFINITE_LISTS"],
+  infiniteList: (query: MovieSearchQuery) => [...MovieKeys.infiniteLists(), cleanQuery(query)],
 };
 export const MovieGenresKeys = {
   all: ["MOVIE_GENRES"],
@@ -228,6 +230,35 @@ export function useGetMovieSearch(
       return getMovieSearch({ fetch, query });
     },
     options,
+  );
+}
+
+export type InfiniteMovieSearchFn = InfiniteData<IMovieSearchFn>;
+export function useGetInfiniteMovieSearch(
+  query: MovieSearchQuery,
+  options?: UseInfiniteQueryOptions<IMovieDiscoverFn>,
+) {
+  return useInfiniteQuery<IMovieDiscoverFn>(
+    MovieKeys.infiniteList(query),
+    async ({ pageParam = query.page }) => {
+      const fetch = fetchBrowser();
+      return getMovieSearch({
+        fetch,
+        query: { ...query, page: pageParam || "1" },
+      });
+    },
+    {
+      select: options?.select as unknown as (
+        data: InfiniteMovieSearchFn,
+      ) => InfiniteData<IMovieDiscoverFn>,
+      getNextPageParam: lastPage => {
+        if (lastPage.results.length < 20) {
+          return undefined;
+        }
+        return lastPage.page + 1;
+      },
+      ...options,
+    },
   );
 }
 

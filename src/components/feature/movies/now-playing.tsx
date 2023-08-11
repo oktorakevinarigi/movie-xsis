@@ -14,6 +14,7 @@ type IGetCard = {
   release_date: string;
   vote_average: number;
   genre_ids: number[];
+  overview: string;
 };
 
 function getCard(item: IGetCard, genres: { id: number; name: string }[]) {
@@ -26,6 +27,7 @@ function getCard(item: IGetCard, genres: { id: number; name: string }[]) {
         year={item.release_date ? dayjs(item.release_date).format("YYYY") : ""}
         ratings={item.vote_average}
         genre={getGenre(item.genre_ids, genres || [])}
+        overview={item.overview}
       />
     </div>
   );

@@ -41,6 +41,7 @@ export function Recommendation(props: RecommendationProps) {
               genre={getGenre(item.genre_ids, getMovieGenres.data?.genres || [])}
               year={item.release_date ? dayjs(item.release_date).format("YYYY") : ""}
               ratings={item.vote_average}
+              overview={item.overview}
             />
           </div>
         ))}
