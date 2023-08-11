@@ -17,7 +17,7 @@ export function YoutubeSection(props: YoutubeSectionProps) {
       {isMobile ? (
         <LiteYouTubeEmbed id={id} title={title ?? "Youtube Video"} />
       ) : (
-        <div className="w-[560px]">
+        <div className="sm:w-[560px] w-auto">
           <LiteYouTubeEmbed id={id} title={title ?? "Youtube Video"} />
         </div>
       )}
